@@ -10,19 +10,19 @@ There are two ways to use Flipbook.
 
 1. Create a new Flipbook, and simply attach it to a target view. You must provide a duration (how long to capture snapshots for), and an image prefix (used to name snapshot pngs):
 
-    activityFlipbook = Flipbook()
-    activityFlipbook.renderTargetView(activity, duration: 1.0, imagePrefix: "activity")
-    activity.startAnimating()
+        activityFlipbook = Flipbook()
+        activityFlipbook.renderTargetView(activity, duration: 1.0, imagePrefix: "activity")
+        activity.startAnimating()
 
 2. Create a new Flipbook, provide a target view, and update its appearance for each frame:
 
-    arcFlipbook = Flipbook()
-        
-    arcFlipbook.renderTargetView(arcView, imagePrefix: "arc", frameCount: 60) { (view, frame) in
-        if let arcView = view as? ArcView {
-            arcView.shapeLayer.strokeEnd = CGFloat(frame) * (1.0 / 60.0)
+        arcFlipbook = Flipbook()
+            
+        arcFlipbook.renderTargetView(arcView, imagePrefix: "arc", frameCount: 60) { (view, frame) in
+            if let arcView = view as? ArcView {
+                arcView.shapeLayer.strokeEnd = CGFloat(frame) * (1.0 / 60.0)
+            }
         }
-    }
 
 The `frame` parameter provided by the update block will be an integer from 0 to `frameCount`.
 
@@ -44,8 +44,8 @@ The provided project also includes a sample WatchKit App, which animates some de
 2. Add a `WKInterfaceImage` to your Storyboard and hook it up to an outlet in your interface controller.
 3. Set the image name of the `WKInterfaceImage` to your `imagePrefix` plus a dash:
 
-    arcImage.setImageNamed("arc-")
+        arcImage.setImageNamed("arc-")
 
 4. Start animating:
     
-    arcImage.startAnimatingWithImagesInRange(NSMakeRange(0, 60), duration: 1.0, repeatCount: 0)
+        arcImage.startAnimatingWithImagesInRange(NSMakeRange(0, 60), duration: 1.0, repeatCount: 0)
