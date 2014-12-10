@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
         let activity = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
         activity.backgroundColor = UIColor.whiteColor()
         view.addSubview(activity)
@@ -40,12 +42,6 @@ class ViewController: UIViewController {
         activityFlipbook.renderTargetView(activity, duration: 1.0, imagePrefix: "activity")
         activity.startAnimating()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
+    
 }
 
