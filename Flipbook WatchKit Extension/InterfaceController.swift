@@ -15,9 +15,8 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet weak var arcImage: WKInterfaceImage!
     @IBOutlet weak var activityImage: WKInterfaceImage!
     
-    override init(context: AnyObject?) {
-        // Initialize variables here.
-        super.init(context: context)
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
         
         // Configure interface objects here.
         NSLog("%@ init", self)
