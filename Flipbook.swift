@@ -41,7 +41,7 @@ class Flipbook: NSObject {
         
         for frame in 0..<frameCount {
             updateBlock(view: view, frame: frame)
-            renderViewToImage(view)
+            renderViewToImage(view, afterScreenUpdates: true)
         }
     }
     
@@ -50,7 +50,7 @@ class Flipbook: NSObject {
             startTime = sender.timestamp
         }
         
-        renderViewToImage(self.targetView)
+        renderViewToImage(self.targetView, afterScreenUpdates: false)
         
         if sender.timestamp - startTime! > duration {
             sender.invalidate()
@@ -70,8 +70,8 @@ class Flipbook: NSObject {
         return nil
     }
     
-    private func renderViewToImage(view: UIView?) {
-        if let snapshot = view?.snapshotView(frameInSuperview) {
+    private func renderViewToImage(view: UIView?, afterScreenUpdates: Bool) {
+        if let snapshot = view?.snapshotView(frameInSuperview, afterScreenUpdates: afterScreenUpdates) {
             if let imagePath = self.newImagePath() {
                 UIImagePNGRepresentation(snapshot).writeToFile(imagePath, atomically: true)
             }
@@ -86,16 +86,15 @@ class Flipbook: NSObject {
 
 extension UIView {
 
-    func snapshotView(frameInSuperview: Bool) -> UIImage {
-        return frameInSuperview ? snapshotFrameOfViewInSuperview() : snapshotImage();
+    func snapshotView(frameInSuperview: Bool, afterScreenUpdates: Bool) -> UIImage {
+        return frameInSuperview ? snapshotFrameOfViewInSuperview(afterScreenUpdates) : snapshotImage(afterScreenUpdates);
     }
 
-    func snapshotImage() -> UIImage {
+    func snapshotImage(afterScreenUpdate: Bool) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(bounds.size, opaque, 2.0)
-        
-        let layer: CALayer = self.layer.presentationLayer() as? CALayer ?? self.layer
-        layer.renderInContext(UIGraphicsGetCurrentContext())
-        
+
+        self.drawViewHierarchyInRect(CGRect(origin: CGPointZero, size:bounds.size), afterScreenUpdates: afterScreenUpdate)
+
         let image = UIGraphicsGetImageFromCurrentImageContext()
         
         UIGraphicsEndImageContext()
@@ -103,16 +102,15 @@ extension UIView {
         return image
     }
 
-    func snapshotFrameOfViewInSuperview() -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(self.superview!.bounds.size, opaque, 2.0)
+    func snapshotFrameOfViewInSuperview(afterScreenUpdate: Bool) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(superview!.bounds.size, opaque, 2.0)
 
-        let layer: CALayer = self.superview!.layer.presentationLayer() as? CALayer ?? self.layer
-        layer.renderInContext(UIGraphicsGetCurrentContext())
+        superview?.drawViewHierarchyInRect(superview!.bounds, afterScreenUpdates: afterScreenUpdate)
 
         let superviewImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
 
-        let cropFrame = CGRectApplyAffineTransform(self.frame, CGAffineTransformMakeScale(2.0, 2.0))
-        let image: CGImageRef = CGImageCreateWithImageInRect(superviewImage.CGImage, cropFrame)
+        let cropRect = CGRectApplyAffineTransform(frame, CGAffineTransformMakeScale(2.0, 2.0))
+        let image: CGImageRef = CGImageCreateWithImageInRect(superviewImage.CGImage, cropRect)
 
         UIGraphicsEndImageContext()
         
