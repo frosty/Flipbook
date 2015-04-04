@@ -28,6 +28,7 @@ class Flipbook: NSObject {
         self.duration = duration
         self.imagePrefix = imagePrefix
         self.frameInSuperview = frameInSuperview
+        
         imageCounter = 0
         displayLink.frameInterval = frameInterval
         displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
