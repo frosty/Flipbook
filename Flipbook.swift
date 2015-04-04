@@ -19,13 +19,15 @@ class Flipbook: NSObject {
     private var startTime: CFTimeInterval?
     private var imagePrefix: String!
     private var imageCounter = 0
-    
+    private var frameInSuperview = false
+
     // Render the target view to images for the specified duration
-    func renderTargetView(view: UIView, duration: NSTimeInterval, imagePrefix: String, frameInterval: Int = 1) {
+    func renderTargetView(view: UIView, duration: NSTimeInterval, imagePrefix: String, frameInterval: Int = 1, frameInSuperview: Bool = false) {
         assert(frameInterval >= 1)
         self.targetView = view
         self.duration = duration
         self.imagePrefix = imagePrefix
+        self.frameInSuperview = frameInSuperview
         
         imageCounter = 0
         displayLink.frameInterval = frameInterval
@@ -39,7 +41,7 @@ class Flipbook: NSObject {
         
         for frame in 0..<frameCount {
             updateBlock(view: view, frame: frame)
-            renderViewToImage(view)
+            renderViewToImage(view, afterScreenUpdates: true)
         }
     }
     
@@ -48,7 +50,7 @@ class Flipbook: NSObject {
             startTime = sender.timestamp
         }
         
-        renderViewToImage(self.targetView)
+        renderViewToImage(self.targetView, afterScreenUpdates: false)
         
         if sender.timestamp - startTime! > duration {
             sender.invalidate()
@@ -68,8 +70,8 @@ class Flipbook: NSObject {
         return nil
     }
     
-    private func renderViewToImage(view: UIView?) {
-        if let snapshot = view?.snapshotImage() {
+    private func renderViewToImage(view: UIView?, afterScreenUpdates: Bool) {
+        if let snapshot = view?.snapshotView(frameInSuperview, afterScreenUpdates: afterScreenUpdates) {
             if let imagePath = self.newImagePath() {
                 UIImagePNGRepresentation(snapshot).writeToFile(imagePath, atomically: true)
             }
@@ -83,16 +85,35 @@ class Flipbook: NSObject {
 }
 
 extension UIView {
-    func snapshotImage() -> UIImage {
+
+    func snapshotView(frameInSuperview: Bool, afterScreenUpdates: Bool) -> UIImage {
+        return frameInSuperview ? snapshotFrameOfViewInSuperview(afterScreenUpdates) : snapshotImage(afterScreenUpdates);
+    }
+
+    func snapshotImage(afterScreenUpdate: Bool) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(bounds.size, opaque, 2.0)
-        
-        let layer: CALayer = self.layer.presentationLayer() as? CALayer ?? self.layer
-        layer.renderInContext(UIGraphicsGetCurrentContext())
-        
+
+        self.drawViewHierarchyInRect(CGRect(origin: CGPointZero, size:bounds.size), afterScreenUpdates: afterScreenUpdate)
+
         let image = UIGraphicsGetImageFromCurrentImageContext()
         
         UIGraphicsEndImageContext()
         
         return image
+    }
+
+    func snapshotFrameOfViewInSuperview(afterScreenUpdate: Bool) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(superview!.bounds.size, opaque, 2.0)
+
+        superview?.drawViewHierarchyInRect(superview!.bounds, afterScreenUpdates: afterScreenUpdate)
+
+        let superviewImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+
+        let cropRect = CGRectApplyAffineTransform(frame, CGAffineTransformMakeScale(2.0, 2.0))
+        let image: CGImageRef = CGImageCreateWithImageInRect(superviewImage.CGImage, cropRect)
+
+        UIGraphicsEndImageContext()
+        
+        return UIImage(CGImage: image)!
     }
 }
