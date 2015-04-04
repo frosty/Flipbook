@@ -19,14 +19,15 @@ class Flipbook: NSObject {
     private var startTime: CFTimeInterval?
     private var imagePrefix: String!
     private var imageCounter = 0
-    
+    private var frameInSuperview = false
+
     // Render the target view to images for the specified duration
-    func renderTargetView(view: UIView, duration: NSTimeInterval, imagePrefix: String, frameInterval: Int = 1) {
+    func renderTargetView(view: UIView, duration: NSTimeInterval, imagePrefix: String, frameInterval: Int = 1, frameInSuperview: Bool = false) {
         assert(frameInterval >= 1)
         self.targetView = view
         self.duration = duration
         self.imagePrefix = imagePrefix
-        
+        self.frameInSuperview = frameInSuperview
         imageCounter = 0
         displayLink.frameInterval = frameInterval
         displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
@@ -69,7 +70,7 @@ class Flipbook: NSObject {
     }
     
     private func renderViewToImage(view: UIView?) {
-        if let snapshot = view?.snapshotImage() {
+        if let snapshot = view?.snapshotView(frameInSuperview) {
             if let imagePath = self.newImagePath() {
                 UIImagePNGRepresentation(snapshot).writeToFile(imagePath, atomically: true)
             }
@@ -83,6 +84,11 @@ class Flipbook: NSObject {
 }
 
 extension UIView {
+
+    func snapshotView(frameInSuperview: Bool) -> UIImage {
+        return frameInSuperview ? snapshotFrameOfViewInSuperview() : snapshotImage();
+    }
+
     func snapshotImage() -> UIImage {
         UIGraphicsBeginImageContextWithOptions(bounds.size, opaque, 2.0)
         
@@ -94,5 +100,21 @@ extension UIView {
         UIGraphicsEndImageContext()
         
         return image
+    }
+
+    func snapshotFrameOfViewInSuperview() -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.superview!.bounds.size, opaque, 2.0)
+
+        let layer: CALayer = self.superview!.layer.presentationLayer() as? CALayer ?? self.layer
+        layer.renderInContext(UIGraphicsGetCurrentContext())
+
+        let superviewImage: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+
+        let cropFrame = CGRectApplyAffineTransform(self.frame, CGAffineTransformMakeScale(2.0, 2.0))
+        let image: CGImageRef = CGImageCreateWithImageInRect(superviewImage.CGImage, cropFrame)
+
+        UIGraphicsEndImageContext()
+        
+        return UIImage(CGImage: image)!
     }
 }
