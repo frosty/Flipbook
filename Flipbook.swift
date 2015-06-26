@@ -64,7 +64,7 @@ class Flipbook: NSObject {
     
     private func newImagePath() -> String? {
         if let documentsDirectory = documentsDirectory() {
-            let imagePath = documentsDirectory.stringByAppendingPathComponent(NSString(format: "%@-%d@2x.png", imagePrefix, imageCounter++))
+            let imagePath = documentsDirectory.stringByAppendingPathComponent(String(format: "%@-%d@2x.png", imagePrefix, imageCounter++))
             return imagePath
         }
         
