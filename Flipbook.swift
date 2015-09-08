@@ -87,15 +87,10 @@ class Flipbook: NSObject {
 
 extension UIView {
     func snapshotImage() -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(bounds.size, opaque, 2.0)
-        
-        let layer: CALayer = self.layer.presentationLayer() as? CALayer ?? self.layer
-        layer.renderInContext(UIGraphicsGetCurrentContext())
-        
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, 2.0)
+        self.drawViewHierarchyInRect(self.bounds, afterScreenUpdates: false);
         let image = UIGraphicsGetImageFromCurrentImageContext()
-        
         UIGraphicsEndImageContext()
-        
         return image
     }
 }
