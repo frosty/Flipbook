@@ -37,10 +37,13 @@ class Flipbook: NSObject {
     func renderTargetView(view: UIView, imagePrefix: String, frameCount: Int, updateBlock: (view: UIView, frame: Int) -> Void) {
         self.imagePrefix = imagePrefix
         
+        println("[Flipbook] Starting capture...")
         for frame in 0..<frameCount {
             updateBlock(view: view, frame: frame)
             renderViewToImage(view)
         }
+        println("[Flipbook] Images exported to: \(documentsDirectory()!)")
+        println("[Flipbook] Capture complete!")
     }
     
     func displayLinkTick(sender: CADisplayLink) {
