@@ -10,10 +10,8 @@
 		1765260A1A236A4600B18ACB /* WatchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 176526091A236A4600B18ACB /* WatchKit.framework */; };
 		1765260F1A236A4600B18ACB /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1765260E1A236A4600B18ACB /* InterfaceController.swift */; };
 		176526111A236A4600B18ACB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 176526101A236A4600B18ACB /* Images.xcassets */; };
-		176526151A236A4600B18ACB /* Flipbook Watch App.app in Resources */ = {isa = PBXBuildFile; fileRef = 176526141A236A4600B18ACB /* Flipbook Watch App.app */; };
 		1765261C1A236A4600B18ACB /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1765261B1A236A4600B18ACB /* Interface.storyboard */; };
 		1765261E1A236A4600B18ACB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1765261D1A236A4600B18ACB /* Images.xcassets */; };
-		176526211A236A4600B18ACB /* Flipbook WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 176526071A236A4600B18ACB /* Flipbook WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		176526691A236ABF00B18ACB /* activity-0@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1765262B1A236ABE00B18ACB /* activity-0@2x.png */; };
 		1765266A1A236ABF00B18ACB /* activity-1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1765262C1A236ABE00B18ACB /* activity-1@2x.png */; };
 		1765266B1A236ABF00B18ACB /* activity-2@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 1765262D1A236ABE00B18ACB /* activity-2@2x.png */; };
@@ -136,6 +134,8 @@
 		1765271C1A236AC500B18ACB /* arc-57@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 176526E01A236AC500B18ACB /* arc-57@2x.png */; };
 		1765271D1A236AC500B18ACB /* arc-58@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 176526E11A236AC500B18ACB /* arc-58@2x.png */; };
 		1765271E1A236AC500B18ACB /* arc-59@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 176526E21A236AC500B18ACB /* arc-59@2x.png */; };
+		17CA9F1F1B9F9E0600127A56 /* Flipbook WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 176526071A236A4600B18ACB /* Flipbook WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		17CA9F221B9F9E0600127A56 /* Flipbook Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 176526141A236A4600B18ACB /* Flipbook Watch App.app */; };
 		ED6EAF971A234272001EFFF8 /* ArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6EAF961A234272001EFFF8 /* ArcView.swift */; };
 		ED8D389B1A1F61A0001611C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8D389A1A1F61A0001611C5 /* AppDelegate.swift */; };
 		ED8D389D1A1F61A0001611C5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED8D389C1A1F61A0001611C5 /* ViewController.swift */; };
@@ -147,19 +147,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		176526161A236A4600B18ACB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = ED8D388D1A1F61A0001611C5 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 176526131A236A4600B18ACB;
-			remoteInfo = "Flipbook Watch App";
-		};
-		1765261F1A236A4600B18ACB /* PBXContainerItemProxy */ = {
+		17CA9F1D1B9F9E0600127A56 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ED8D388D1A1F61A0001611C5 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 176526061A236A4600B18ACB;
 			remoteInfo = "Flipbook WatchKit Extension";
+		};
+		17CA9F201B9F9E0600127A56 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ED8D388D1A1F61A0001611C5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 176526131A236A4600B18ACB;
+			remoteInfo = "Flipbook Watch App";
 		};
 		ED8D38AB1A1F61A0001611C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -171,15 +171,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		176526281A236A4600B18ACB /* Embed App Extensions */ = {
+		17CA9F231B9F9E0700127A56 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				176526211A236A4600B18ACB /* Flipbook WatchKit Extension.appex in Embed App Extensions */,
+				17CA9F1F1B9F9E0600127A56 /* Flipbook WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17CA9F241B9F9E0700127A56 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				17CA9F221B9F9E0600127A56 /* Flipbook Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -615,27 +626,28 @@
 			buildRules = (
 			);
 			dependencies = (
-				176526171A236A4600B18ACB /* PBXTargetDependency */,
 			);
 			name = "Flipbook WatchKit Extension";
 			productName = "Flipbook WatchKit Extension";
 			productReference = 176526071A236A4600B18ACB /* Flipbook WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit-extension";
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 		176526131A236A4600B18ACB /* Flipbook Watch App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 176526261A236A4600B18ACB /* Build configuration list for PBXNativeTarget "Flipbook Watch App" */;
 			buildPhases = (
 				176526121A236A4600B18ACB /* Resources */,
+				17CA9F231B9F9E0700127A56 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				17CA9F1E1B9F9E0600127A56 /* PBXTargetDependency */,
 			);
 			name = "Flipbook Watch App";
 			productName = "Flipbook Watch App";
 			productReference = 176526141A236A4600B18ACB /* Flipbook Watch App.app */;
-			productType = "com.apple.product-type.application.watchapp";
+			productType = "com.apple.product-type.application.watchapp2";
 		};
 		ED8D38941A1F61A0001611C5 /* Flipbook */ = {
 			isa = PBXNativeTarget;
@@ -644,12 +656,12 @@
 				ED8D38911A1F61A0001611C5 /* Sources */,
 				ED8D38921A1F61A0001611C5 /* Frameworks */,
 				ED8D38931A1F61A0001611C5 /* Resources */,
-				176526281A236A4600B18ACB /* Embed App Extensions */,
+				17CA9F241B9F9E0700127A56 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				176526201A236A4600B18ACB /* PBXTargetDependency */,
+				17CA9F211B9F9E0600127A56 /* PBXTargetDependency */,
 			);
 			name = Flipbook;
 			productName = Flipbook;
@@ -680,7 +692,9 @@
 		ED8D388D1A1F61A0001611C5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "James Frost";
 				TargetAttributes = {
 					176526061A236A4600B18ACB = {
@@ -725,7 +739,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				176526111A236A4600B18ACB /* Images.xcassets in Resources */,
-				176526151A236A4600B18ACB /* Flipbook Watch App.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -910,15 +923,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		176526171A236A4600B18ACB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 176526131A236A4600B18ACB /* Flipbook Watch App */;
-			targetProxy = 176526161A236A4600B18ACB /* PBXContainerItemProxy */;
-		};
-		176526201A236A4600B18ACB /* PBXTargetDependency */ = {
+		17CA9F1E1B9F9E0600127A56 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 176526061A236A4600B18ACB /* Flipbook WatchKit Extension */;
-			targetProxy = 1765261F1A236A4600B18ACB /* PBXContainerItemProxy */;
+			targetProxy = 17CA9F1D1B9F9E0600127A56 /* PBXContainerItemProxy */;
+		};
+		17CA9F211B9F9E0600127A56 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 176526131A236A4600B18ACB /* Flipbook Watch App */;
+			targetProxy = 17CA9F201B9F9E0600127A56 /* PBXContainerItemProxy */;
 		};
 		ED8D38AC1A1F61A0001611C5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -956,8 +969,12 @@
 				);
 				INFOPLIST_FILE = "Flipbook WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jamesfrost.Flipbook.watchapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -966,8 +983,12 @@
 			buildSettings = {
 				INFOPLIST_FILE = "Flipbook WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jamesfrost.Flipbook.watchapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -976,16 +997,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				IBSC_MODULE = Flipbook_WatchKit_Extension;
 				INFOPLIST_FILE = "Flipbook Watch App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jamesfrost.Flipbook.watchapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -994,12 +1018,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = Flipbook_WatchKit_Extension;
 				INFOPLIST_FILE = "Flipbook Watch App/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jamesfrost.Flipbook.watchapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -1023,6 +1050,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1088,6 +1116,7 @@
 				INFOPLIST_FILE = Flipbook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamesfrost.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1100,6 +1129,7 @@
 				INFOPLIST_FILE = Flipbook/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamesfrost.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -1118,6 +1148,7 @@
 				);
 				INFOPLIST_FILE = FlipbookTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamesfrost.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flipbook.app/Flipbook";
 			};
@@ -1133,6 +1164,7 @@
 				);
 				INFOPLIST_FILE = FlipbookTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jamesfrost.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Flipbook.app/Flipbook";
 			};
@@ -1148,6 +1180,7 @@
 				176526251A236A4600B18ACB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		176526271A236A4600B18ACB /* Build configuration list for PBXNativeTarget "Flipbook WatchKit Extension" */ = {
 			isa = XCConfigurationList;
@@ -1156,6 +1189,7 @@
 				176526231A236A4600B18ACB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ED8D38901A1F61A0001611C5 /* Build configuration list for PBXProject "Flipbook" */ = {
 			isa = XCConfigurationList;

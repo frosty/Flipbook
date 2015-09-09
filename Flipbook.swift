@@ -31,19 +31,19 @@ class Flipbook: NSObject {
         displayLink.frameInterval = frameInterval
         displayLink.addToRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
         
-        println("[Flipbook] Starting capture...")
+        print("[Flipbook] Starting capture...")
     }
     
     func renderTargetView(view: UIView, imagePrefix: String, frameCount: Int, updateBlock: (view: UIView, frame: Int) -> Void) {
         self.imagePrefix = imagePrefix
         
-        println("[Flipbook] Starting capture...")
+        print("[Flipbook] Starting capture...")
         for frame in 0..<frameCount {
             updateBlock(view: view, frame: frame)
             renderViewToImage(view)
         }
-        println("[Flipbook] Images exported to: \(documentsDirectory()!)")
-        println("[Flipbook] Capture complete!")
+        print("[Flipbook] Images exported to: \(documentsDirectory()!)")
+        print("[Flipbook] Capture complete!")
     }
     
     func displayLinkTick(sender: CADisplayLink) {
@@ -57,14 +57,14 @@ class Flipbook: NSObject {
             sender.invalidate()
             sender.removeFromRunLoop(NSRunLoop.mainRunLoop(), forMode: NSDefaultRunLoopMode)
             
-            println("[Flipbook] Images exported to: \(documentsDirectory()!)")
-            println("[Flipbook] Capture complete!")
+            print("[Flipbook] Images exported to: \(documentsDirectory()!)")
+            print("[Flipbook] Capture complete!")
         }
     }
     
     private func newImagePath() -> String? {
         if let documentsDirectory = documentsDirectory() {
-            let imagePath = documentsDirectory.stringByAppendingPathComponent(String(format: "%@-%d@2x.png", imagePrefix, imageCounter++))
+          let imagePath = documentsDirectory.stringByAppendingPathComponent(String(format: "%@-%d@2x.png", imagePrefix, imageCounter++))
             return imagePath
         }
         
@@ -74,14 +74,14 @@ class Flipbook: NSObject {
     private func renderViewToImage(view: UIView?) {
         if let snapshot = view?.snapshotImage() {
             if let imagePath = self.newImagePath() {
-                UIImagePNGRepresentation(snapshot).writeToFile(imagePath, atomically: true)
+                UIImagePNGRepresentation(snapshot)?.writeToFile(imagePath, atomically: true)
             }
         }
     }
     
-    private func documentsDirectory() -> String? {
+    private func documentsDirectory() -> NSString? {
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)
-        return paths.last as? String
+        return paths.last! as NSString
     }
 }
 
@@ -90,7 +90,7 @@ extension UIView {
         UIGraphicsBeginImageContextWithOptions(bounds.size, opaque, 2.0)
         
         let layer: CALayer = self.layer.presentationLayer() as? CALayer ?? self.layer
-        layer.renderInContext(UIGraphicsGetCurrentContext())
+        layer.renderInContext(UIGraphicsGetCurrentContext()!)
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         
