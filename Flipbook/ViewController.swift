@@ -19,11 +19,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let activity = UIActivityIndicatorView(activityIndicatorStyle: .Gray)
-        activity.backgroundColor = UIColor.whiteColor()
+        let activity = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activity.backgroundColor = UIColor.white
         view.addSubview(activity)
         activity.center = view.center
         
@@ -32,14 +32,17 @@ class ViewController: UIViewController {
         arcFlipbook = Flipbook()
         arcView.shapeLayer.strokeEnd = 0
         
-        arcFlipbook.renderTargetView(arcView, imagePrefix: "arc", frameCount: 60) { (view, frame) in
+
+        arcFlipbook.renderTargetView(view: arcView, imagePrefix: "arc", frameCount: 60, updateBlock: {
+            (view, frame) in
             if let arcView = view as? ArcView {
                 arcView.shapeLayer.strokeEnd = CGFloat(frame) * (1.0 / 60.0)
             }
-        }
+        })
+        
 
         activityFlipbook = Flipbook()
-        activityFlipbook.renderTargetView(activity, duration: 1.0, imagePrefix: "activity")
+        activityFlipbook.renderTargetView(view: activity, duration: 3.0, imagePrefix: "activity")
         activity.startAnimating()
     }
     

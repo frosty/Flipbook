@@ -21,10 +21,10 @@ class InterfaceController: WKInterfaceController {
         NSLog("%@ will activate", self)
         
         arcImage.setImageNamed("arc-")
-        arcImage.startAnimatingWithImagesInRange(NSMakeRange(0, 60), duration: 1.0, repeatCount: 0)
+        arcImage.startAnimatingWithImages(in: NSMakeRange(0, 60), duration: 1.0, repeatCount: 0)
         
         activityImage.setImageNamed("activity-")
-        activityImage.startAnimatingWithImagesInRange(NSMakeRange(0, 62), duration: 1.0, repeatCount: 0)
+        activityImage.startAnimatingWithImages(in: NSMakeRange(0, 62), duration: 1.0, repeatCount: 0)
     }
 
     override func didDeactivate() {

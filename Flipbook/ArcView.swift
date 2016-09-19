@@ -12,10 +12,11 @@ import QuartzCore
 
 class ArcView: UIView {
     
-    var color: UIColor = UIColor.greenColor() {
+    var color: UIColor = UIColor.green {
         didSet {
-            dispatch_async(dispatch_get_main_queue()) {
-                self.shapeLayer.strokeColor = self.color.CGColor
+            
+            DispatchQueue.main.async {
+                self.shapeLayer.strokeColor = self.color.cgColor
             }
         }
     }
@@ -28,6 +29,12 @@ class ArcView: UIView {
         }
     }
     
+    override var intrinsicContentSize:CGSize {
+        get{
+            return CGSize(width: 120, height: 120)
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -35,7 +42,7 @@ class ArcView: UIView {
     }
     
     required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+        super.init(coder: aDecoder)!
         
         commonInit()
     }
@@ -43,12 +50,12 @@ class ArcView: UIView {
     func commonInit() {
         backgroundColor = UIColor(white: 0.278, alpha: 1.0)
         
-        shapeLayer.strokeColor = color.CGColor
+        shapeLayer.strokeColor = color.cgColor
         shapeLayer.lineWidth = 10
         shapeLayer.lineCap = kCALineCapSquare
         shapeLayer.strokeEnd = 1.0
         shapeLayer.strokeStart = 0.0
-        shapeLayer.fillColor = UIColor.clearColor().CGColor
+        shapeLayer.fillColor = UIColor.clear.cgColor
 
         updateLayerPath()
         
@@ -62,27 +69,23 @@ class ArcView: UIView {
         animation.autoreverses = false
         animation.fromValue = 0.0
         animation.toValue = 1.0
-        shapeLayer.addAnimation(animation, forKey: "animateStroke")
+        shapeLayer.add(animation, forKey: "animateStroke")
         animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
         layer.needsDisplayOnBoundsChange = true
     }
     
     func stopAnimating() {
-        layer.removeAnimationForKey("animateStroke")
+        layer.removeAnimation(forKey: "animateStroke")
     }
     
     func updateLayerPath() {
-        let ics = intrinsicContentSize()
+        let ics = intrinsicContentSize
 
         let path = UIBezierPath(roundedRect: CGRect(x: shapeLayer.lineWidth / 2.0, y: shapeLayer.lineWidth / 2.0, width: ics.width - shapeLayer.lineWidth, height: ics.height - shapeLayer.lineWidth), cornerRadius: ics.width)
         
         shapeLayer.position = CGPoint(x: 0, y: 0)
 
-        shapeLayer.path = path.CGPath
-    }
-    
-    override func intrinsicContentSize() -> CGSize {
-        return CGSize(width: 120, height: 120)
+        shapeLayer.path = path.cgPath
     }
 }
 /*    CAShapeLayer *_shapeLayer;
