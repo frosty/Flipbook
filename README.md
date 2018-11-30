@@ -2,7 +2,7 @@
 
 A Swift tool for rendering UIViews to image sequences for use with WatchKit, and an accompanying sample WatchKit project.
 
-## Usage
+## Usage
 
 Firstly, drag `Flipbook.swift` into your project.
 
@@ -26,7 +26,7 @@ There are two ways to use Flipbook.
 
 The `frame` parameter provided by the update block will be an integer from 0 to `frameCount`.
 
-## Where are my images?
+## Where are my images?
 
 Once you've run your app and captured your frames, the debug console will contain the path where your images are saved. It's much easier to record using the iOS simulator, as the path is easily accessible. 
 
